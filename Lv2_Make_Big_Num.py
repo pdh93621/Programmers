@@ -1,19 +1,25 @@
+from collections import deque
+
 def solution(number, k):
     
-    answer = ""
-    while True:
-        
-        temp = number.index(max(number[:k+1]))
-        k -= temp
-        answer += number[temp]
-        if not k:
-            if temp < len(number):
-                answer += number[temp + 1:]
-            break    
-        number = number[temp + 1:]    
+    number = deque(list(number))
+    
+    answer = ['0']
+    
+    while k:
+        for _ in range(k):
+            big = number.popleft()
+            #print(temp)
+            if big > answer[-1]:
+                answer[-1] = big
+                k -= 1
+            else:
+                
+                break
+        #print(answer)
+    answer = "".join(answer + list(number))
     return answer
 
 number = "1231234"
 k = 3
-
-print(solution(number, k))
+print(solution(number, k + 1))
