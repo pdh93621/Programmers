@@ -1,2 +1,2 @@
-test_list = "0"
-print(bool(test_list))
+test_list = "3"
+print(test_list.lower())
