@@ -1,9 +1,13 @@
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
 int main(){
-    cout << (7 / 3) << endl;
+
+    stack<int> k;
+    k.push(1);
+    cout << !k.empty() << endl;
 
     return 0;
 }
