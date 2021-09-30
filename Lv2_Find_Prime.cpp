@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-
 using namespace std;
 
 bool compare(int i, int j){
@@ -29,6 +28,7 @@ int solution(string numbers){
     vector<int> poss_nums;
     int answer = 0;
 
+    //만들 수 있는 가장 큰 수
     string::iterator iter;
     for(iter = numbers.begin(); iter != numbers.end(); iter++){
         nums.push_back(*iter);
@@ -41,11 +41,13 @@ int solution(string numbers){
         max_num.push_back(nums[i]);
     }
 
+    // 가장 큰 수 까지의 소수를 담은 vector 만들기
     vector<bool> prime;
     prime = primes(stoi(max_num) + 1);
 
     reverse(nums.begin(), nums.end());
 
+    // next_permutaion + unique + erase 이용해서 가능한 모든 수 만들기
     do {
         string temp = "";
 
@@ -58,6 +60,7 @@ int solution(string numbers){
     sort(poss_nums.begin(), poss_nums.end());
     poss_nums.erase(unique(poss_nums.begin(), poss_nums.end()), poss_nums.end());
 
+    // 조합된 수 중 소수만 판별
     for(int k = 0; k < poss_nums.size(); k++){
         if (prime[poss_nums[k]]){
             answer++;

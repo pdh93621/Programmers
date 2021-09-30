@@ -2,58 +2,37 @@
 #include <string>
 #include <vector>
 #include <stack>
-#include <utility>
 #include <algorithm>
+
 
 using namespace std;
 
-// int time_diff(vector<int> prices, int i){
-//     for(int j = i + 1; j < prices.size(); j++){
-//         if (prices[i] > prices[j]) {
-//             return j - i;
-//         }
-//     }
-//     return prices.size() - i - 1;
-// }
-
-// vector<int> solution(vector<int> prices) {
-//     vector<int> answer;
-    
-//     for(int i = 0; i < prices.size(); i++){
-//         answer.push_back(time_diff(prices, i));
-//     }
-//     return answer;
-// }
-
 vector<int> solution(vector<int> prices) {
-    vector<int> answer = {0};
-    stack<pair<int, int>> times;
-    pair<int, int> temp;
-
-    times.push(make_pair(prices.back(), 0));
-    // cout << times.top().first << endl;
-
-    for(int i = prices.size() - 2; i >= 0; i--){
-        temp = make_pair(prices[i], 1);
-        // cout << i << endl;
-        while (prices[i] <= times.top().first and !times.empty()) {
-            // cout << times.top().first << endl;
-            temp.second += times.top().second;
+    vector<int> answer(prices.size());
+    stack<int> times;
+    int temp;
+    times.push(0);
+    for(int i = 1; i < prices.size(); i++){
+        while(!times.empty() and prices[times.top()] > prices[i]){
+            temp = times.top();
+            answer[temp] = i - temp;
             times.pop();
         }
-        times.push(temp);
-        //cout << temp.first << " " << temp.second << endl;
-        answer.push_back(temp.second);
+        times.push(i);
     }
 
-    reverse(answer.begin(), answer.end());
+    while (!times.empty()){
+        temp = times.top();
+        times.pop();
+        answer[temp] = prices.size() - 1 - temp;
+    }
 
     return answer;
 }
 
 int main(){
     
-    vector<int> prices = {1, 2, 3};
+    vector<int> prices = {1, 2, 3, 2, 3};
 
     vector<int> answer = solution(prices);
 
