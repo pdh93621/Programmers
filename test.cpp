@@ -1,13 +1,21 @@
 #include <iostream>
 #include <stack>
+#include <cmath>
 
 using namespace std;
 
+int multiplier(int n){
+    if (n == 0){
+        return 781;
+    }
+    return (multiplier(n - 1) - 1) / 5;
+}
+
 int main(){
-
-    stack<int> k;
-    k.push(1);
-    cout << !k.empty() << endl;
-
+    for(int i = 0; i < 5; i++){
+        cout << multiplier(i) << endl;
+    }
+    
+    
     return 0;
 }
