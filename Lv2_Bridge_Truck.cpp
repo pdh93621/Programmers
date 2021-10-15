@@ -6,11 +6,18 @@
 using namespace std;
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
-    int answer = 0;
-    queue<int> q;
-    queue<int> tw;
-    for(int i = 0; i < truck_weights.size(); i++){
-        tw.push(truck_weights[i]);
+    int answer = 1;
+    int truck_num = 0;
+    int now_weight = truck_weights[0];
+    queue<int> now_bridge;
+
+    now_bridge.push(101);
+    
+    while(truck_num < truck_weights.size() and now_bridge.empty()){
+        if(answer == now_bridge.front()){
+            now_bridge.pop();
+        }
+        answer += 1;
     }
 
     return answer;

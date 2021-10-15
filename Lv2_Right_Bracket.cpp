@@ -27,7 +27,7 @@ bool solution(string s)
 
 int main(){
 
-    string s = "(()("	;
+    string s = "(()(";
 
     cout << (bool)solution(s) << endl;
 
